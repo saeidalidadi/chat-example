@@ -9,10 +9,10 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
+// User request with an id to get online users
 app.get('/private/:userID', function (req, res) {
-  const lastUsers = onlineUsers;
+
   onlineUsers.set(req.params.userID, '')
-  console.dir(lastUsers);
   res.render('private', { userIDs: onlineUsers } );
 });
 
@@ -30,6 +30,4 @@ io.on('connection', function(socket) {
   });
 });
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
-});
+module.exports = http;
