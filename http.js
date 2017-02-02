@@ -1,11 +1,15 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var redis = require('socket.io-redis');
+io.adapter(redis({ host: 'localhost', port: 6379 }));
+
 app.set('view engine', 'pug')
 app.set('views', './views')
 const onlineUsers = new Map();
 
 app.get('/', function(req, res) {
+  console.log('somthing');
   res.sendFile(__dirname + '/index.html');
 });
 
